@@ -113,11 +113,12 @@ void calendarTapped(CalendarTapDetails calendarTapDetails) {
 
 **Screenshots**
 
-![dayview](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img1.png)
-![week](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img2.png)
-![work](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img3.png)
-![month](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img4.png)
-![timeline day](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img5.png)
-![timeline week](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img6.png)
-![timeline work week](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img7.png)
+|<img alt="day view" src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img1.png" width="250" height="400" />|
+<img alt="week view" src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img2.png" width="250" height="400" />|
+<img alt="work week view" src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img3.png" width="250" height="400" />|
+<img alt="month view" src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img4.png" width="250" height="400" />|
+<img alt="timeline day view"  src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img5.png" width="250" height="400" />|
+<img alt="timeline week view"  src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img6.png" width="250" height="400" />|
+<img alt="timeline work week view"  src="http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img7.png" width="250" height="400" />|
+ 
 
