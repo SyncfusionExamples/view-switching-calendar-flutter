@@ -109,4 +109,15 @@ void calendarTapped(CalendarTapDetails calendarTapDetails) {
   }
 } 
 ``` 
- 
+**[View document in Syncfusion Flutter Knowledge base](https://www.syncfusion.com/kb/10944/how-to-switch-between-views-of-the-event-calendar-sfcalendar-in-flutter)**
+
+**Screenshots**
+
+![dayview](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img1.png)
+![week](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img2.png)
+![work](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img3.png)
+![month](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img4.png)
+![timeline day](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img5.png)
+![timeline week](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img6.png)
+![timeline work week](http://www.syncfusion.com/uploads/user/kb/flut/flut-612/flut-612_img7.png)
+
