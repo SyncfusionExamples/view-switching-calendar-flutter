@@ -30,14 +30,15 @@ List<String> views = <String>[
 ];
 
 class ScheduleExample extends State<MyApp> {
-  CalendarView _calendarView;
+  CalendarController _controller;
   DateTime _jumpToTime = DateTime.now();
   String _text = '';
   Color headerColor, viewHeaderColor, calendarColor, defaultColor;
 
   @override
   void initState() {
-    _calendarView = CalendarView.week;
+    _controller = CalendarController();
+    _controller.view = CalendarView.week;
     _text = DateFormat('MMMM yyyy').format(_jumpToTime).toString();
     super.initState();
   }
@@ -101,19 +102,19 @@ class ScheduleExample extends State<MyApp> {
             onSelected: (String value) {
               setState(() {
                 if (value == 'Day') {
-                  _calendarView = CalendarView.day;
+                  _controller.view = CalendarView.day;
                 } else if (value == 'Week') {
-                  _calendarView = CalendarView.week;
+                  _controller.view = CalendarView.week;
                 } else if (value == 'WorkWeek') {
-                  _calendarView = CalendarView.workWeek;
+                  _controller.view = CalendarView.workWeek;
                 } else if (value == 'Month') {
-                  _calendarView = CalendarView.month;
+                  _controller.view = CalendarView.month;
                 } else if (value == 'Timeline Day') {
-                  _calendarView = CalendarView.timelineDay;
+                  _controller.view = CalendarView.timelineDay;
                 } else if (value == 'Timeline Week') {
-                  _calendarView = CalendarView.timelineWeek;
+                  _controller.view = CalendarView.timelineWeek;
                 } else if (value == 'Timeline WorkWeek') {
-                  _calendarView = CalendarView.timelineWorkWeek;
+                  _controller.view = CalendarView.timelineWorkWeek;
                 }
               });
             },
@@ -127,13 +128,15 @@ class ScheduleExample extends State<MyApp> {
                 viewHeaderStyle:
                     ViewHeaderStyle(backgroundColor: viewHeaderColor),
                 backgroundColor: calendarColor,
-                view: _calendarView,
+                controller: _controller,
                 initialDisplayDate: _jumpToTime,
                 dataSource: getCalendarDataSource(),
                 onTap: calendarTapped,
+                monthViewSettings: MonthViewSettings(
+                    navigationDirection: MonthNavigationDirection.vertical),
                 onViewChanged: (ViewChangedDetails viewChangedDetails) {
                   String headerText;
-                  if (_calendarView == CalendarView.month) {
+                  if (_controller.view == CalendarView.month) {
                     headerText = DateFormat('MMMM yyyy')
                         .format(viewChangedDetails.visibleDates[
                             viewChangedDetails.visibleDates.length ~/ 2])
@@ -161,14 +164,14 @@ class ScheduleExample extends State<MyApp> {
   }
 
   void calendarTapped(CalendarTapDetails calendarTapDetails) {
-    if (_calendarView == CalendarView.month &&
+    if (_controller.view == CalendarView.month &&
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
-      _calendarView = CalendarView.day;
+      _controller.view = CalendarView.day;
       _updateState(calendarTapDetails.date);
-    } else if ((_calendarView == CalendarView.week ||
-            _calendarView == CalendarView.workWeek) &&
+    } else if ((_controller.view == CalendarView.week ||
+            _controller.view == CalendarView.workWeek) &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
-      _calendarView = CalendarView.day;
+      _controller.view = CalendarView.day;
       _updateState(calendarTapDetails.date);
     }
   }
