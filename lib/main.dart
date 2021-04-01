@@ -30,14 +30,13 @@ List<String> views = <String>[
 ];
 
 class ScheduleExample extends State<MyApp> {
-  CalendarController _controller;
+  CalendarController _controller=CalendarController();
   DateTime _jumpToTime = DateTime.now();
   String _text = '';
-  Color headerColor, viewHeaderColor, calendarColor, defaultColor;
+  Color? headerColor, viewHeaderColor, calendarColor, defaultColor;
 
   @override
   void initState() {
-    _controller = CalendarController();
     _controller.view = CalendarView.week;
     _text = DateFormat('MMMM yyyy').format(_jumpToTime).toString();
     super.initState();
@@ -126,7 +125,7 @@ class ScheduleExample extends State<MyApp> {
               child: SfCalendar(
                 headerHeight: 0,
                 viewHeaderStyle:
-                    ViewHeaderStyle(backgroundColor: viewHeaderColor),
+                ViewHeaderStyle(backgroundColor: viewHeaderColor),
                 backgroundColor: calendarColor,
                 controller: _controller,
                 initialDisplayDate: _jumpToTime,
@@ -139,7 +138,7 @@ class ScheduleExample extends State<MyApp> {
                   if (_controller.view == CalendarView.month) {
                     headerText = DateFormat('MMMM yyyy')
                         .format(viewChangedDetails.visibleDates[
-                            viewChangedDetails.visibleDates.length ~/ 2])
+                    viewChangedDetails.visibleDates.length ~/ 2])
                         .toString();
                   } else {
                     headerText = DateFormat('MMMM yyyy')
@@ -148,7 +147,7 @@ class ScheduleExample extends State<MyApp> {
                   }
 
                   if (headerText != null && headerText != _text) {
-                    SchedulerBinding.instance
+                    SchedulerBinding.instance!
                         .addPostFrameCallback((Duration duration) {
                       _text = headerText;
                       setState(() {});
@@ -167,12 +166,12 @@ class ScheduleExample extends State<MyApp> {
     if (_controller.view == CalendarView.month &&
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _controller.view = CalendarView.day;
-      _updateState(calendarTapDetails.date);
+      _updateState(calendarTapDetails.date!);
     } else if ((_controller.view == CalendarView.week ||
-            _controller.view == CalendarView.workWeek) &&
+        _controller.view == CalendarView.workWeek) &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
       _controller.view = CalendarView.day;
-      _updateState(calendarTapDetails.date);
+      _updateState(calendarTapDetails.date!);
     }
   }
 
