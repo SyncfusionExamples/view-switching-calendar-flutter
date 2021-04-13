@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ViewSwitching());
 
-class MyApp extends StatefulWidget {
+class ViewSwitching extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ScheduleExample();
 }
@@ -19,28 +17,10 @@ List<String> colors = <String>[
   'Default'
 ];
 
-List<String> views = <String>[
-  'Day',
-  'Week',
-  'WorkWeek',
-  'Month',
-  'Timeline Day',
-  'Timeline Week',
-  'Timeline WorkWeek'
-];
-
-class ScheduleExample extends State<MyApp> {
-  CalendarController _controller=CalendarController();
+class ScheduleExample extends State<ViewSwitching> {
+  final CalendarController _controller = CalendarController();
   DateTime _jumpToTime = DateTime.now();
-  String _text = '';
   Color? headerColor, viewHeaderColor, calendarColor, defaultColor;
-
-  @override
-  void initState() {
-    _controller.view = CalendarView.week;
-    _text = DateFormat('MMMM yyyy').format(_jumpToTime).toString();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,76 +67,27 @@ class ScheduleExample extends State<MyApp> {
             ),
           ],
           backgroundColor: headerColor,
-          centerTitle: true,
-          titleSpacing: 60,
-          title: Text(_text),
-          leading: PopupMenuButton<String>(
-            icon: Icon(Icons.calendar_today),
-            itemBuilder: (BuildContext context) => views.map((String choice) {
-              return PopupMenuItem<String>(
-                value: choice,
-                child: Text(choice),
-              );
-            }).toList(),
-            onSelected: (String value) {
-              setState(() {
-                if (value == 'Day') {
-                  _controller.view = CalendarView.day;
-                } else if (value == 'Week') {
-                  _controller.view = CalendarView.week;
-                } else if (value == 'WorkWeek') {
-                  _controller.view = CalendarView.workWeek;
-                } else if (value == 'Month') {
-                  _controller.view = CalendarView.month;
-                } else if (value == 'Timeline Day') {
-                  _controller.view = CalendarView.timelineDay;
-                } else if (value == 'Timeline Week') {
-                  _controller.view = CalendarView.timelineWeek;
-                } else if (value == 'Timeline WorkWeek') {
-                  _controller.view = CalendarView.timelineWorkWeek;
-                }
-              });
-            },
-          ),
         ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: SfCalendar(
-                headerHeight: 0,
-                viewHeaderStyle:
-                ViewHeaderStyle(backgroundColor: viewHeaderColor),
-                backgroundColor: calendarColor,
-                controller: _controller,
-                initialDisplayDate: _jumpToTime,
-                dataSource: getCalendarDataSource(),
-                onTap: calendarTapped,
-                monthViewSettings: MonthViewSettings(
-                    navigationDirection: MonthNavigationDirection.vertical),
-                onViewChanged: (ViewChangedDetails viewChangedDetails) {
-                  String headerText;
-                  if (_controller.view == CalendarView.month) {
-                    headerText = DateFormat('MMMM yyyy')
-                        .format(viewChangedDetails.visibleDates[
-                    viewChangedDetails.visibleDates.length ~/ 2])
-                        .toString();
-                  } else {
-                    headerText = DateFormat('MMMM yyyy')
-                        .format(viewChangedDetails.visibleDates[0])
-                        .toString();
-                  }
-
-                  if (headerText != null && headerText != _text) {
-                    SchedulerBinding.instance!
-                        .addPostFrameCallback((Duration duration) {
-                      _text = headerText;
-                      setState(() {});
-                    });
-                  }
-                },
-              ),
-            ),
+        body:  SfCalendar(
+          view: CalendarView.week,
+          allowedViews: [
+            CalendarView.day,
+            CalendarView.week,
+            CalendarView.workWeek,
+            CalendarView.month,
+            CalendarView.timelineDay,
+            CalendarView.timelineWeek,
+            CalendarView.timelineWorkWeek
           ],
+          viewHeaderStyle:
+          ViewHeaderStyle(backgroundColor: viewHeaderColor),
+          backgroundColor: calendarColor,
+          controller: _controller,
+          initialDisplayDate: _jumpToTime,
+          dataSource: getCalendarDataSource(),
+          onTap: calendarTapped,
+          monthViewSettings: MonthViewSettings(
+              navigationDirection: MonthNavigationDirection.vertical),
         ),
       ),
     );
@@ -166,20 +97,11 @@ class ScheduleExample extends State<MyApp> {
     if (_controller.view == CalendarView.month &&
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _controller.view = CalendarView.day;
-      _updateState(calendarTapDetails.date!);
     } else if ((_controller.view == CalendarView.week ||
-        _controller.view == CalendarView.workWeek) &&
+            _controller.view == CalendarView.workWeek) &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
       _controller.view = CalendarView.day;
-      _updateState(calendarTapDetails.date!);
     }
-  }
-
-  void _updateState(DateTime date) {
-    setState(() {
-      _jumpToTime = date;
-      _text = DateFormat('MMMM yyyy').format(_jumpToTime).toString();
-    });
   }
 
   _DataSource getCalendarDataSource() {
