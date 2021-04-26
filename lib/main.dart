@@ -9,8 +9,6 @@ class ViewSwitching extends StatefulWidget {
   State<StatefulWidget> createState() => ScheduleExample();
 }
 
-
-
 class ScheduleExample extends State<ViewSwitching> {
   List<String> _colors = <String>[
     'Pink',
@@ -20,7 +18,6 @@ class ScheduleExample extends State<ViewSwitching> {
     'Default'
   ];
   final CalendarController _controller = CalendarController();
-  DateTime _jumpToTime = DateTime.now();
   Color? _headerColor, _viewHeaderColor, _calendarColor;
 
   @override
@@ -69,7 +66,7 @@ class ScheduleExample extends State<ViewSwitching> {
           ],
           backgroundColor: _headerColor,
         ),
-        body:  SfCalendar(
+        body: SfCalendar(
           view: CalendarView.week,
           allowedViews: [
             CalendarView.day,
@@ -80,11 +77,10 @@ class ScheduleExample extends State<ViewSwitching> {
             CalendarView.timelineWeek,
             CalendarView.timelineWorkWeek
           ],
-          viewHeaderStyle:
-          ViewHeaderStyle(backgroundColor: _viewHeaderColor),
+          viewHeaderStyle: ViewHeaderStyle(backgroundColor: _viewHeaderColor),
           backgroundColor: _calendarColor,
           controller: _controller,
-          initialDisplayDate: _jumpToTime,
+          initialDisplayDate: DateTime.now(),
           dataSource: getCalendarDataSource(),
           onTap: calendarTapped,
           monthViewSettings: MonthViewSettings(
@@ -99,7 +95,7 @@ class ScheduleExample extends State<ViewSwitching> {
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _controller.view = CalendarView.day;
     } else if ((_controller.view == CalendarView.week ||
-        _controller.view == CalendarView.workWeek) &&
+            _controller.view == CalendarView.workWeek) &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
       _controller.view = CalendarView.day;
     }
