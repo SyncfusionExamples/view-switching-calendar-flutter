@@ -9,18 +9,19 @@ class ViewSwitching extends StatefulWidget {
   State<StatefulWidget> createState() => ScheduleExample();
 }
 
-List<String> colors = <String>[
-  'Pink',
-  'Blue',
-  'Wall Brown',
-  'Yellow',
-  'Default'
-];
+
 
 class ScheduleExample extends State<ViewSwitching> {
+  List<String> _colors = <String>[
+    'Pink',
+    'Blue',
+    'Wall Brown',
+    'Yellow',
+    'Default'
+  ];
   final CalendarController _controller = CalendarController();
   DateTime _jumpToTime = DateTime.now();
-  Color? headerColor, viewHeaderColor, calendarColor, defaultColor;
+  Color? _headerColor, _viewHeaderColor, _calendarColor;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class ScheduleExample extends State<ViewSwitching> {
             PopupMenuButton<String>(
               icon: Icon(Icons.color_lens),
               itemBuilder: (BuildContext context) {
-                return colors.map((String choice) {
+                return _colors.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
@@ -42,31 +43,31 @@ class ScheduleExample extends State<ViewSwitching> {
               onSelected: (String value) {
                 setState(() {
                   if (value == 'Pink') {
-                    headerColor = const Color(0xFF09e8189);
-                    viewHeaderColor = const Color(0xFF0f3acb6);
-                    calendarColor = const Color(0xFF0ffe5d8);
+                    _headerColor = const Color(0xFF09e8189);
+                    _viewHeaderColor = const Color(0xFF0f3acb6);
+                    _calendarColor = const Color(0xFF0ffe5d8);
                   } else if (value == 'Blue') {
-                    headerColor = const Color(0xFF0007eff);
-                    viewHeaderColor = const Color(0xFF03aa4f6);
-                    calendarColor = const Color(0xFF0bae5ff);
+                    _headerColor = const Color(0xFF0007eff);
+                    _viewHeaderColor = const Color(0xFF03aa4f6);
+                    _calendarColor = const Color(0xFF0bae5ff);
                   } else if (value == 'Wall Brown') {
-                    headerColor = const Color(0xFF0937c5d);
-                    viewHeaderColor = const Color(0xFF0e6d9b1);
-                    calendarColor = const Color(0xFF0d1d2d6);
+                    _headerColor = const Color(0xFF0937c5d);
+                    _viewHeaderColor = const Color(0xFF0e6d9b1);
+                    _calendarColor = const Color(0xFF0d1d2d6);
                   } else if (value == 'Yellow') {
-                    headerColor = const Color(0xFF0f7ed53);
-                    viewHeaderColor = const Color(0xFF0fff77f);
-                    calendarColor = const Color(0xFF0f7f2cc);
+                    _headerColor = const Color(0xFF0f7ed53);
+                    _viewHeaderColor = const Color(0xFF0fff77f);
+                    _calendarColor = const Color(0xFF0f7f2cc);
                   } else if (value == 'Default') {
-                    headerColor = null;
-                    viewHeaderColor = null;
-                    calendarColor = null;
+                    _headerColor = null;
+                    _viewHeaderColor = null;
+                    _calendarColor = null;
                   }
                 });
               },
             ),
           ],
-          backgroundColor: headerColor,
+          backgroundColor: _headerColor,
         ),
         body:  SfCalendar(
           view: CalendarView.week,
@@ -80,8 +81,8 @@ class ScheduleExample extends State<ViewSwitching> {
             CalendarView.timelineWorkWeek
           ],
           viewHeaderStyle:
-          ViewHeaderStyle(backgroundColor: viewHeaderColor),
-          backgroundColor: calendarColor,
+          ViewHeaderStyle(backgroundColor: _viewHeaderColor),
+          backgroundColor: _calendarColor,
           controller: _controller,
           initialDisplayDate: _jumpToTime,
           dataSource: getCalendarDataSource(),
@@ -98,7 +99,7 @@ class ScheduleExample extends State<ViewSwitching> {
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _controller.view = CalendarView.day;
     } else if ((_controller.view == CalendarView.week ||
-            _controller.view == CalendarView.workWeek) &&
+        _controller.view == CalendarView.workWeek) &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
       _controller.view = CalendarView.day;
     }
