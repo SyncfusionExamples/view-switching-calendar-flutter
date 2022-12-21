@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-void main() => runApp(ViewSwitching());
+void main() => runApp(const ViewSwitching());
 
 class ViewSwitching extends StatefulWidget {
+  const ViewSwitching({super.key});
+
   @override
   State<StatefulWidget> createState() => ScheduleExample();
 }
 
 class ScheduleExample extends State<ViewSwitching> {
-  List<String> _colors = <String>[
+  final List<String> _colors = <String>[
     'Pink',
     'Blue',
     'Wall Brown',
@@ -28,7 +29,7 @@ class ScheduleExample extends State<ViewSwitching> {
         appBar: AppBar(
           actions: <Widget>[
             PopupMenuButton<String>(
-              icon: Icon(Icons.color_lens),
+              icon: const Icon(Icons.color_lens),
               itemBuilder: (BuildContext context) {
                 return _colors.map((String choice) {
                   return PopupMenuItem<String>(
@@ -68,7 +69,7 @@ class ScheduleExample extends State<ViewSwitching> {
         ),
         body: SfCalendar(
           view: CalendarView.week,
-          allowedViews: [
+          allowedViews: const [
             CalendarView.day,
             CalendarView.week,
             CalendarView.workWeek,
@@ -83,7 +84,7 @@ class ScheduleExample extends State<ViewSwitching> {
           initialDisplayDate: DateTime.now(),
           dataSource: getCalendarDataSource(),
           onTap: calendarTapped,
-          monthViewSettings: MonthViewSettings(
+          monthViewSettings: const MonthViewSettings(
               navigationDirection: MonthNavigationDirection.vertical),
         ),
       ),
@@ -95,7 +96,7 @@ class ScheduleExample extends State<ViewSwitching> {
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _controller.view = CalendarView.day;
     } else if ((_controller.view == CalendarView.week ||
-            _controller.view == CalendarView.workWeek) &&
+        _controller.view == CalendarView.workWeek) &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
       _controller.view = CalendarView.day;
     }
