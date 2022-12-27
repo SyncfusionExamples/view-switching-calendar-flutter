@@ -4,6 +4,8 @@ A quick-start example to help you to switch between views of the Flutter Calenda
 
 You can navigate between calendar views in Flutter Event Calendar by using the view property of Calendar, and in this sample, you can switch between event calendar views by using the calendar's allowedViews property.
 
+![SwitchingView](https://user-images.githubusercontent.com/46158936/209673821-fc25a6b6-ea53-4f33-84c9-ad74ae045017.gif)
+
 For more details, refer to our [KB](https://www.syncfusion.com/kb/10944/how-to-switch-between-views-of-the-flutter-calendar) documentation.
 
 ## Requirements to run the demo
